@@ -7,26 +7,37 @@ import {
 } from 'typeorm';
 
 import * as argon2 from 'argon2';
-import { EntityEnum } from 'src/utils/enums/entity';
+import { EntityEnum } from 'src/common/enums/entity';
 
 @Entity(EntityEnum.Users)
 export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
+  // lot va ten
   @Column()
-  name: string;
+  firstName: string;
+
+  // ho
+  @Column()
+  lastName: string;
 
   @Column({ unique: true })
   @Index()
   email: string;
 
-  @Column()
-  password: string;
-
   @Index()
   @Column()
   phone: string;
+
+  @Column()
+  dateOfBirth: string;
+
+  @Column()
+  password: string;
+
+  @Column()
+  isVerified: boolean;
 
   @BeforeInsert()
   async hashPassword() {

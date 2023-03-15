@@ -1,5 +1,6 @@
 export class UserRO {
-  readonly name: string;
+  readonly lastName: string;
+  readonly firstName: string;
   readonly email: string;
   readonly phone: string;
   readonly dateOfBirth: string;

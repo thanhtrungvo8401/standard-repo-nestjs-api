@@ -4,7 +4,11 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 export class CreateUserDto {
   @IsNotEmpty()
   @ApiProperty()
-  readonly name: string;
+  readonly firstName: string;
+
+  @IsNotEmpty()
+  @ApiProperty()
+  readonly lastName: string;
 
   @IsEmail()
   @ApiProperty()

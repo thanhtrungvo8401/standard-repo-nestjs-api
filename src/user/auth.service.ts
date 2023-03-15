@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as argon2 from 'argon2';
 import { plainToInstance } from 'class-transformer';
+import { ErrorCodes } from 'src/common/enums/error-codes';
 import { LoginUserDto, LoginUserRO, UserRO } from './dto';
 import { UserEntity } from './entity/user.entity';
 import { UserService } from './user.service';
@@ -26,6 +27,9 @@ export class AuthService {
     );
 
     if (!isValidCredential) return null;
+
+    if (!user.isVerified)
+      throw new BadRequestException(ErrorCodes.NotVerifiedAccount);
 
     return plainToInstance(UserRO, user, {
       excludePrefixes: ['password'],
